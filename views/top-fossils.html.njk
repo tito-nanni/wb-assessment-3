@@ -10,6 +10,18 @@
   <h1> Welcome, {{ userName }}</h1>
 
   <h2> Most Liked Fossils</h2>
+
+<form action ="/like-fossil" method="post">
+<label for="fossilDropwdown">Select a fossil to like:</label>
+<select id="fossilDropdown" name="fossilId">
+{% for fossilKey, fossil in MOST_LIKED_FOSSILS %}
+<option value="{{ fossilKey }}">{{ fossil.name }}</option>
+{% endfor %}
+</select>
+<button type="submit">Like Fossil</button>
+</form>
+
+
   {% for fossilKey, fossil in MOST_LIKED_FOSSILS %}
     <div class="fossil-div">
       <h3>{{ userName }}, this is a {{ fossil.name }}</h3>

@@ -87,6 +87,19 @@ app.get('/random-fossil.json', (req, res) => {
   res.json(randomFossil);
 });
 
+app.post('/like-fossil', (req, res) => {
+  const {fossilId} = req.body;
+
+  if(MOST_LIKED_FOSSILS[fossilId]) {
+    MOST_LIKED_FOSSILS[fossilId].num_likes++;
+
+    const userName = req.session.userName;
+    res.render('thank-you.html.njk', { userName })
+  } else {
+    res.send('Invalid fossil ID')
+  }
+})
+
 
 
 ViteExpress.listen(app, port, () => {
