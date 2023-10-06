@@ -62,10 +62,32 @@ const OTHER_FOSSILS = [
 
 // TODO: Replace this comment with your code
 
+app.get('/', (req, res) => {
+
+  res.render('homepage.html.njk')
+})
+
+app.get('/get-name', (req, res) => {
+  const {name} = req.query;
+  req.session.userName = name; 
+  res.redirect('/top-fossils')
+})
+
+app.get('/top-fossils', (req, res) => {
+  const userName = req.session.userName;
+  if (userName) {
+    res.render('top-fossils.html.njk', { userName, MOST_LIKED_FOSSILS })
+  } else {
+    res.redirect('/')
+  }
+})
+
 app.get('/random-fossil.json', (req, res) => {
   const randomFossil = lodash.sample(OTHER_FOSSILS);
   res.json(randomFossil);
 });
+
+
 
 ViteExpress.listen(app, port, () => {
   console.log(`Server running on http://localhost:${port}...`);
