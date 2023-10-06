@@ -82,11 +82,6 @@ app.get('/top-fossils', (req, res) => {
   }
 })
 
-app.get('/random-fossil.json', (req, res) => {
-  const randomFossil = lodash.sample(OTHER_FOSSILS);
-  res.json(randomFossil);
-});
-
 app.post('/like-fossil', (req, res) => {
   const {fossilId} = req.body;
 
@@ -100,6 +95,10 @@ app.post('/like-fossil', (req, res) => {
   }
 })
 
+app.get('/random-fossil.json', (req, res) => {
+  const randomFossil = lodash.sample(OTHER_FOSSILS);
+  res.json(randomFossil);
+});
 
 
 ViteExpress.listen(app, port, () => {
